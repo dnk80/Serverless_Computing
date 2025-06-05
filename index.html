@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GASKET Viewer</title>
+</head>
+<body>
+    <h1>Select Table from GASKET Dataset</h1>
+    <form method="POST">
+        <label for="table">Choose table:</label>
+        <select name="table" id="table">
+            {% for table in tables %}
+                <option value="{{ table }}" {% if table == selected %}selected{% endif %}>{{ table }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">View</button>
+    </form>
+
+    {% if records %}
+        <h2>Records from {{ selected }}</h2>
+        <table border="1">
+            <tr><th>MPN</th><th>ANALOG</th><th>DESCRIPTION</th></tr>
+            {% for row in records %}
+                <tr>
+                    <td>{{ row.MPN }}</td>
+                    <td>{{ row.ANALOG }}</td>
+                    <td>{{ row.DESCRIPTION }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</body>
+</html>
